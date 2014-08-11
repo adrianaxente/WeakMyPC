@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WeakMyPC</string>
+    <string name="app_name">Weak my pC</string>
+    <string name="action_add_new">Add new PC</string>
 </resources>

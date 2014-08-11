@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#ffffff">
+
+    <TextView style="@style/add_edit_pc_default_section_label_style"
+              android:text="@string/remote_pc_text_view_title"/>
+
+    <TextView style="@style/add_edit_pc_default_text_edit_label_style"
+              android:text">@string/remote_pc_name_text_view_title</item>/>
+    <EditText style="@style/add_edit_pc_default_text_edit_style"/>
+
+    <TextView style="@style/add_edit_pc_default_text_edit_label_style"/>
+    <EditText style="@style/add_edit_pc_default_text_edit_style"/>
+
+</LinearLayout>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="remote_pc_text_view_title">REMOTE PC</string>
+    <string name="remote_pc_name_text_view_title">Computer name</string>
+</resources>
