@@ -10,7 +10,8 @@
               android:text="@string/remote_pc_text_view_title"/>
 
     <TextView style="@style/add_edit_pc_default_text_edit_label_style"
-              android:text">@string/remote_pc_name_text_view_title</item>/>
+              android:text="@string/remote_pc_name_text_view_title"/>
+
     <EditText style="@style/add_edit_pc_default_text_edit_style"/>
 
     <TextView style="@style/add_edit_pc_default_text_edit_label_style"/>
