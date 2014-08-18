@@ -9,12 +9,30 @@
     <TextView style="@style/add_edit_pc_default_section_label_style"
               android:text="@string/remote_pc_text_view_title"/>
 
+    <!-- COMPUTER NAME -->
     <TextView style="@style/add_edit_pc_default_text_edit_label_style"
               android:text="@string/remote_pc_name_text_view_title"/>
 
     <EditText style="@style/add_edit_pc_default_text_edit_style"/>
 
-    <TextView style="@style/add_edit_pc_default_text_edit_label_style"/>
+    <!-- COMPUTER OR ROUTER ADDRESS (IP/DNS name) -->
+    <TextView style="@style/add_edit_pc_default_text_edit_label_style"
+              android:text="@string/remote_pc_address_text_view_title"/>
+
     <EditText style="@style/add_edit_pc_default_text_edit_style"/>
+
+    <!-- COMPUTER MAC Address -->
+    <TextView style="@style/add_edit_pc_default_text_edit_label_style"
+              android:text="@string/remote_pc_mac_address_text_view_title"/>
+
+    <EditText style="@style/add_edit_pc_default_text_edit_style"/>
+
+
+    <!-- PORT -->
+    <TextView style="@style/add_edit_pc_default_text_edit_label_style"
+              android:text="@string/remote_pc_port_text_view_title"/>
+
+    <EditText style="@style/add_edit_pc_default_text_edit_style"
+              android:inputType="number"/>
 
 </LinearLayout>

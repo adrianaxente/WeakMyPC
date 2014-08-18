@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="remote_pc_text_view_title">REMOTE PC</string>
-    <string name="remote_pc_name_text_view_title">Computer name</string>
+    <string name="remote_pc_name_text_view_title">Name</string>
+    <string name="remote_pc_address_text_view_title">Address or DNS name</string>
+    <string name="remote_pc_mac_address_text_view_title">MAC address</string>
+    <string name="remote_pc_port_text_view_title">Port</string>
 </resources>
