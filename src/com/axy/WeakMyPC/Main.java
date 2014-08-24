@@ -6,6 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.content.Intent;
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
 
 public class Main extends Activity {
 
@@ -16,6 +18,7 @@ public class Main extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        //ObjectContainer container = Db4oEmbedded.openFile("databaseFile.db4o");
     }
 
     /**
