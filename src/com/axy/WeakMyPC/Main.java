@@ -6,8 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.content.Intent;
-import com.db4o.Db4oEmbedded;
+import com.axy.WeakMyPC.Database.DbConfig;
+import com.axy.WeakMyPC.Database.DbConnection;
+import com.axy.WeakMyPC.Database.Entities.Computer;
 import com.db4o.ObjectContainer;
+
+import java.util.List;
 
 public class Main extends Activity {
 
@@ -18,7 +22,13 @@ public class Main extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        //ObjectContainer container = Db4oEmbedded.openFile("databaseFile.db4o");
+        DbConfig dbConfig = new DbConfig();
+        DbConnection dbConnection = new DbConnection(this, dbConfig);
+        ObjectContainer dbContainer = dbConnection.getObjectContainer();
+        //Computer comp = new Computer("Ion's computer", "192.168.1.3", "ED:AA:12:23:45:56", 7);
+        //dbContainer.store(comp);
+        List<Computer> allComputers = dbContainer.query(Computer.class);
+        dbContainer.close();
     }
 
     /**
