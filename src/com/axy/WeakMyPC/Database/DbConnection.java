@@ -2,6 +2,7 @@ package com.axy.WeakMyPC.Database;
 
 import android.content.Context;
 import android.util.Log;
+import com.axy.WeakMyPC.Misc.ApplicationContext;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 
@@ -12,36 +13,35 @@ public class DbConnection
 {
     // <editor-fold description="Private Fields">
 
-    private Context _context;
-    private DbConfig _dbConfig;
-    private ObjectContainer _objectContainer;
+    private static ObjectContainer _objectContainer = null;
 
     // </editor-fold>
 
     // <editor-fold description="Constructor">
 
-    public DbConnection(Context context, DbConfig dbConfig)
+    private DbConnection()
     {
-        this._context = context;
-        this._dbConfig = dbConfig;
     }
 
     // </editor-fold>
 
     // <editor-fold description="Public Methods">
 
-    public ObjectContainer getObjectContainer()
+    public static ObjectContainer getObjectContainer()
     {
         try
         {
-            if (this._objectContainer == null || this._objectContainer.ext().isClosed())
+            if (_objectContainer == null || _objectContainer.ext().isClosed())
             {
-                this._objectContainer =
+                Context context = ApplicationContext.get();
+                DbConfig dbConfig = new DbConfig();
+                _objectContainer =
                         Db4oEmbedded.openFile(
-                                this._dbConfig.getConfiguration(this._context),
-                                this._dbConfig.getDatabasePath(this._context));
+                                dbConfig.getConfiguration(context),
+                                dbConfig.getDatabasePath(context));
             }
-            return this._objectContainer;
+
+            return _objectContainer;
         }
         catch (Exception ie)
         {

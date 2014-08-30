@@ -1,7 +1,7 @@
 package com.axy.WeakMyPC.Database;
 
 import android.content.Context;
-import com.axy.WeakMyPC.Database.Entities.Computer;
+import com.axy.WeakMyPC.Database.Entities.ComputerModel;
 import com.db4o.Db4oEmbedded;
 import com.db4o.config.EmbeddedConfiguration;
 
@@ -15,7 +15,7 @@ public final class DbConfig
     public EmbeddedConfiguration getConfiguration(Context ctx)
     {
         EmbeddedConfiguration result = Db4oEmbedded.newConfiguration();
-        Computer.DbConfigure(result);
+        ComputerModel.DbConfigure(result);
 
         return result;
     }

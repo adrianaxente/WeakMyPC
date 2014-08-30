@@ -5,16 +5,41 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import com.axy.WeakMyPC.Database.Entities.ComputerModel;
+import com.axy.WeakMyPC.Interfaces.IAcceptCancelView;
+import com.axy.WeakMyPC.ViewModels.AddEditPCViewModel;
+import org.robobinding.binder.Binders;
 
 /**
  * Created by adrianaxente on 10.08.2014.
  */
-public class AddEditPC extends Activity {
+public class AddEditPC extends Activity implements IAcceptCancelView
+{
+
+    // <editor-fold description="Private Fields">
+
+    private AddEditPCViewModel _viewModel;
+
+    private ComputerModel _model;
+
+    // </editor-fold>
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_edit_pc);
-        setupInterface();
+
+        Intent intent = this.getIntent();
+        this._model = (ComputerModel)intent.getSerializableExtra("Model");
+
+        if (this._model == null)
+        {
+            this._model = new ComputerModel("New Pc", "192.168.1.1", "AA:BB:CC:DD:EE", 23);
+        }
+
+        this._viewModel = new AddEditPCViewModel(this._model, this);
+        View rootView = Binders.inflateAndBind(this, R.layout.add_edit_pc, this._viewModel);
+        setContentView(rootView);
     }
 
     /**
@@ -26,26 +51,19 @@ public class AddEditPC extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_edit_pc, menu);
+        Binders.inflateAndBindMenu(menu, inflater, R.menu.add_edit_pc, this._viewModel, this);
+
+        //inflater.inflate(R.menu.add_edit_pc, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void setupInterface()
-    {
-        Intent intent = this.getIntent();
-        String operation = intent.getStringExtra("Operation");
+    @Override
+    public void accept() {
+        this.finish();
+    }
 
-        String title = "";
-
-        if (operation.equals("add"))
-        {
-            title = "Add new PC";
-        }
-        else if (operation.equals("edit"))
-        {
-            title = "Edit PC";
-        }
-
-        this.setTitle(title);
+    @Override
+    public void cancel() {
+        this.finish();
     }
 }

@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:bind="http://robobinding.org/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:background="#ffffff">
-    <TextView
+
+    <ListView
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World, Main"
-            />
+            android:layout_height="fill_parent"
+            android:background="#ffffff"
+            bind:itemLayout="@layout/computer_item"
+            bind:source="{computerList}"
+            android:id="@+id/computers"/>
+
 </LinearLayout>
 

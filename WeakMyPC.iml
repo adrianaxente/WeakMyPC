@@ -24,6 +24,19 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/robobinding-0.8.5-jar-with-dependencies.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/robobinding-validator-0.8.3.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/Downloads/robobinding-0.8.5-javadoc.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/robobinding-validator-0.8.3-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

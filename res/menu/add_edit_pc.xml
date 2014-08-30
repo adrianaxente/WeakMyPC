@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:bind="http://robobinding.org/android">
+
     <item android:id="@+id/action_remove"
           android:title="@string/action_remove"
           android:icon="@drawable/ic_action_remove"
-          android:showAsAction="always" />
+          android:showAsAction="always"
+          bind:onMenuItemClick="cancel"/>
 
     <item android:id="@+id/action_accept"
           android:title="@string/action_accept"
           android:icon="@drawable/ic_action_accept"
-          android:showAsAction="always" />
+          android:showAsAction="always"
+          bind:onMenuItemClick="accept"/>
 
 </menu>

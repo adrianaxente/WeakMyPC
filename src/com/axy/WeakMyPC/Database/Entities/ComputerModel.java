@@ -2,13 +2,17 @@ package com.axy.WeakMyPC.Database.Entities;
 
 import com.db4o.config.EmbeddedConfiguration;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 /**
  * Created by adrianaxente on 29.08.2014.
  */
-public class Computer {
+public class ComputerModel implements Serializable {
 
     // <editor-fold desc="Static Fields">
 
+    public UUID Id;
     public String Name;
     public String IpAddress;
     public String MacAddress;
@@ -18,13 +22,8 @@ public class Computer {
 
     // <editor-fold desc="Constructor">
 
-    /**
-     * Constructs and instance of the computer object
-     * @param name
-     */
-    public Computer(String name)
+    protected ComputerModel()
     {
-        this.Name = name;
     }
 
     /**
@@ -34,9 +33,9 @@ public class Computer {
      * @param macAddress
      * @param port
      */
-    public Computer(String name, String ipAddress, String macAddress, int port)
+    public ComputerModel(String name, String ipAddress, String macAddress, int port)
     {
-        this(name);
+        this.Name = name;
         this.IpAddress = ipAddress;
         this.MacAddress = macAddress;
         this.Port = port;
@@ -47,14 +46,14 @@ public class Computer {
     // <editor-fold desc="Static Methods">
 
     /**
-     * Confiures the database for this entity
+     * Configures the database for this entity
      * @param dbConfiguration
      */
     public static void DbConfigure(EmbeddedConfiguration dbConfiguration)
     {
-        dbConfiguration.common().objectClass(Computer.class).objectField("Name").indexed(true);
-        dbConfiguration.common().objectClass(Computer.class).cascadeOnUpdate(true);
-        dbConfiguration.common().objectClass(Computer.class).cascadeOnActivate(true);
+        dbConfiguration.common().objectClass(ComputerModel.class).objectField("Id").indexed(true);
+        dbConfiguration.common().objectClass(ComputerModel.class).cascadeOnUpdate(true);
+        dbConfiguration.common().objectClass(ComputerModel.class).cascadeOnActivate(true);
     }
 
     // </editor-fold>
