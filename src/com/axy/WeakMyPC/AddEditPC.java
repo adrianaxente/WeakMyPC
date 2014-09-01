@@ -7,14 +7,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import com.axy.WeakMyPC.Database.Entities.ComputerModel;
-import com.axy.WeakMyPC.Interfaces.IAcceptCancelView;
+import com.axy.WeakMyPC.Framework.Events.EventArg;
+import com.axy.WeakMyPC.Framework.Events.IEventListener;
 import com.axy.WeakMyPC.ViewModels.AddEditPCViewModel;
 import org.robobinding.binder.Binders;
 
 /**
  * Created by adrianaxente on 10.08.2014.
  */
-public class AddEditPC extends Activity implements IAcceptCancelView
+public class AddEditPC extends Activity
 {
 
     // <editor-fold description="Private Fields">
@@ -37,9 +38,24 @@ public class AddEditPC extends Activity implements IAcceptCancelView
             this._model = new ComputerModel("New Pc", "192.168.1.1", "AA:BB:CC:DD:EE", 23);
         }
 
-        this._viewModel = new AddEditPCViewModel(this._model, this);
+        this._viewModel = new AddEditPCViewModel(this._model);
         View rootView = Binders.inflateAndBind(this, R.layout.add_edit_pc, this._viewModel);
         setContentView(rootView);
+
+        IEventListener closeEventListener =
+            new IEventListener()
+            {
+                @Override
+                public void execute(EventArg arg)
+                {
+                    AddEditPC.this.finish();
+                }
+            };
+
+        this._viewModel.acceptEvent.addEventLister(closeEventListener);
+        this._viewModel.cancelEvent.addEventLister(closeEventListener);
+
+        this.setTitle(this._viewModel.getTitle());
     }
 
     /**
@@ -55,15 +71,5 @@ public class AddEditPC extends Activity implements IAcceptCancelView
 
         //inflater.inflate(R.menu.add_edit_pc, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public void accept() {
-        this.finish();
-    }
-
-    @Override
-    public void cancel() {
-        this.finish();
     }
 }

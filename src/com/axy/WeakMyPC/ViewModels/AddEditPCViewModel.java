@@ -5,7 +5,8 @@ package com.axy.WeakMyPC.ViewModels;
 import android.view.MenuItem;
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Entities.ComputerModel;
-import com.axy.WeakMyPC.Interfaces.IAcceptCancelView;
+import com.axy.WeakMyPC.Framework.Events.Event;
+import com.axy.WeakMyPC.Framework.Events.EventArg;
 import com.db4o.ObjectContainer;
 import org.robobinding.aspects.PresentationModel;
 import org.robobinding.presentationmodel.AbstractPresentationModel;
@@ -20,13 +21,16 @@ public class AddEditPCViewModel
 
     private ComputerModel _model;
 
-   private IAcceptCancelView _acceptCancelActivity;
+    public final Event acceptEvent = new Event();
+
+    public final Event cancelEvent = new Event();
+
 
     // </editor-fold>
 
     // <editor-fold description="Constructor">
 
-    public AddEditPCViewModel(ComputerModel model, IAcceptCancelView acceptCancelActivity) throws NullPointerException
+    public AddEditPCViewModel(ComputerModel model) throws NullPointerException
     {
         super();
 
@@ -36,12 +40,6 @@ public class AddEditPCViewModel
         }
 
         this._model = model;
-        this._acceptCancelActivity = acceptCancelActivity;
-
-        acceptCancelActivity.setTitle(
-                this._model.Id == null
-                    ? "Add Computer"
-                    : "Edit Computer");
     }
 
     // </editor-fold>
@@ -60,6 +58,14 @@ public class AddEditPCViewModel
     public String getPort() { return  String.valueOf(this._model.Port); }
     public void setPort(String port) { this._model.Port = Integer.parseInt(port); }
 
+
+    public String getTitle()
+    {
+        return this._model.Id == null
+                    ? "Add Computer"
+                    : "Edit Computer";
+    }
+
     // </editor-fold>
 
     // <editor-fold description="Actions">
@@ -72,18 +78,13 @@ public class AddEditPCViewModel
         objContainer.store(this._model);
         objContainer.commit();
 
-        if (this._acceptCancelActivity != null)
-        {
-            this._acceptCancelActivity.accept();
-        }
+        this.acceptEvent.fire(EventArg.EMPTY);
+
     }
 
     public void cancel(MenuItem menuItem)
     {
-        if (this._acceptCancelActivity != null)
-        {
-            this._acceptCancelActivity.cancel();
-        }
+        this.cancelEvent.fire(EventArg.EMPTY);
     }
 
     // </editor-fold>

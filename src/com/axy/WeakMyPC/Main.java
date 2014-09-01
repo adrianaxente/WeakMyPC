@@ -7,9 +7,11 @@ import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.content.Intent;
 import android.view.View;
+import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Entities.ComputerModel;
 import com.axy.WeakMyPC.Misc.ApplicationContext;
 import com.axy.WeakMyPC.ViewModels.ComputerListViewModel;
+import com.db4o.ObjectContainer;
 import org.robobinding.binder.Binders;
 
 import java.util.ArrayList;
@@ -22,17 +24,13 @@ public class Main extends Activity {
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        ApplicationContext.getInstance().init(getApplicationContext());
+
         super.onCreate(savedInstanceState);
 
-        List<ComputerModel> model = new ArrayList<ComputerModel>();
-        model.add(new ComputerModel("Test Pc1", "wewqewq", "sdsadas", 32));
-        model.add(new ComputerModel("Test Pc2", "wewqewq", "sdsadas", 32));
-        model.add(new ComputerModel("Test Pc3", "wewqewq", "sdsadas", 32));
-        model.add(new ComputerModel("Test Pc4", "wewqewq", "sdsadas", 32));
-        model.add(new ComputerModel("Test Pc5", "wewqewq", "sdsadas", 32));
-        model.add(new ComputerModel("Test Pc6", "wewqewq", "sdsadas", 32));
-
-
+        ObjectContainer objectContainer = DbConnection.getObjectContainer();
+        List<ComputerModel> model = objectContainer.query(ComputerModel.class);
 
         ComputerListViewModel viewModel = new ComputerListViewModel(model);
 
@@ -47,8 +45,6 @@ public class Main extends Activity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        ApplicationContext.getInstance().init(getApplicationContext());
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.computers, menu);

@@ -12,6 +12,7 @@
             android:layout_height="fill_parent"
             android:background="#ffffff"
             bind:itemLayout="@layout/computer_item"
+            bind:onItemClick="editComputer"
             bind:source="{computerList}"
             android:id="@+id/computers"/>
 
