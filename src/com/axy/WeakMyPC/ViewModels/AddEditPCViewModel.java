@@ -78,7 +78,7 @@ public class AddEditPCViewModel
         objContainer.store(this._model);
         objContainer.commit();
 
-        this.acceptEvent.fire(EventArg.EMPTY);
+        this.acceptEvent.fire(EventArg.EMPTY); 
 
     }
 
