@@ -61,7 +61,7 @@ public class AddEditPCViewModel
 
     public String getTitle()
     {
-        return this._model.Id == null
+        return this._model.getId() == 0
                     ? "Add Computer"
                     : "Edit Computer";
     }

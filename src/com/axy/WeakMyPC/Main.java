@@ -1,17 +1,22 @@
 package com.axy.WeakMyPC;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Entities.ComputerModel;
+import com.axy.WeakMyPC.Framework.Events.GenericEventArg;
+import com.axy.WeakMyPC.Framework.Events.IGenericEventListener;
 import com.axy.WeakMyPC.Misc.ApplicationContext;
 import com.axy.WeakMyPC.ViewModels.ComputerListViewModel;
 import com.db4o.ObjectContainer;
+import com.db4o.ext.Db4oUUID;
 import org.robobinding.binder.Binders;
 
 import java.util.ArrayList;
@@ -36,6 +41,15 @@ public class Main extends Activity {
 
         View rootView = Binders.inflateAndBind(this, R.layout.computers, viewModel);
         setContentView(rootView);
+
+        viewModel.editEvent.addEventLister(new IGenericEventListener<ComputerModel>() {
+            @Override
+            public void execute(GenericEventArg<ComputerModel> arg) {
+                Intent intent = new Intent(Main.this, AddEditPC.class);
+                intent.putExtra("ModelId", arg.output.getId());
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -67,10 +81,8 @@ public class Main extends Activity {
      * Add action handler
      */
     public void add() {
-        ComputerModel model = new ComputerModel("My Pc","192.168.1.2", "AA:BB:CC:DD:EE:FF", 43);
+        ComputerModel model = new ComputerModel();
         Intent intent = new Intent(this, AddEditPC.class);
-        intent.putExtra("Operation", "add");
-        intent.putExtra("Model", model);
         /*EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);*/

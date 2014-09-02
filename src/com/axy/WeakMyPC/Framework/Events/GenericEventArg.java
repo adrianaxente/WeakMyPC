@@ -2,5 +2,14 @@ package com.axy.WeakMyPC.Framework.Events;
 
 public class GenericEventArg<TOutput> extends EventArg
 {
-    TOutput output;
+    public TOutput output;
+
+    public GenericEventArg()
+    {
+    }
+
+    public GenericEventArg(TOutput output)
+    {
+        this.output = output;
+    }
 }

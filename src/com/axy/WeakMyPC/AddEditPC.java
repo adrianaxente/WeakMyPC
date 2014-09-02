@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Entities.ComputerModel;
 import com.axy.WeakMyPC.Framework.Events.EventArg;
 import com.axy.WeakMyPC.Framework.Events.IEventListener;
 import com.axy.WeakMyPC.ViewModels.AddEditPCViewModel;
+import com.db4o.ext.ObjectInfo;
 import org.robobinding.binder.Binders;
 
 /**
@@ -31,11 +33,17 @@ public class AddEditPC extends Activity
         super.onCreate(savedInstanceState);
 
         Intent intent = this.getIntent();
-        this._model = (ComputerModel)intent.getSerializableExtra("Model");
+        long modelId = intent.getLongExtra("ModelId", 0);
+
+        if (modelId != 0)
+        {
+            this._model = DbConnection.getObjectContainer().ext().getByID(modelId);
+            DbConnection.getObjectContainer().ext().activate(this._model);
+        }
 
         if (this._model == null)
         {
-            this._model = new ComputerModel("New Pc", "192.168.1.1", "AA:BB:CC:DD:EE", 23);
+            this._model = new ComputerModel();
         }
 
         this._viewModel = new AddEditPCViewModel(this._model);

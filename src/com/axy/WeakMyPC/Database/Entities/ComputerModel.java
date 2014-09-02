@@ -1,6 +1,9 @@
 package com.axy.WeakMyPC.Database.Entities;
 
+import com.axy.WeakMyPC.Database.DbConnection;
 import com.db4o.config.EmbeddedConfiguration;
+import com.db4o.ext.Db4oUUID;
+import com.db4o.ext.ObjectInfo;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -12,7 +15,6 @@ public class ComputerModel implements Serializable {
 
     // <editor-fold desc="Static Fields">
 
-    public UUID Id;
     public String Name;
     public String IpAddress;
     public String MacAddress;
@@ -22,7 +24,7 @@ public class ComputerModel implements Serializable {
 
     // <editor-fold desc="Constructor">
 
-    protected ComputerModel()
+    public ComputerModel()
     {
     }
 
@@ -43,6 +45,16 @@ public class ComputerModel implements Serializable {
 
     // </editor-fold>
 
+    // </editor-fold description="Getters & Setters">
+
+    public long getId()
+    {
+        ObjectInfo objectInfo = DbConnection.getObjectContainer().ext().getObjectInfo(this);
+        return objectInfo != null ? objectInfo.getInternalID() : null;
+    }
+
+    // </editor-fold>
+
     // <editor-fold desc="Static Methods">
 
     /**
@@ -54,6 +66,7 @@ public class ComputerModel implements Serializable {
         dbConfiguration.common().objectClass(ComputerModel.class).objectField("Id").indexed(true);
         dbConfiguration.common().objectClass(ComputerModel.class).cascadeOnUpdate(true);
         dbConfiguration.common().objectClass(ComputerModel.class).cascadeOnActivate(true);
+        dbConfiguration.common().objectClass(ComputerModel.class).generateUUIDs(true);
     }
 
     // </editor-fold>
