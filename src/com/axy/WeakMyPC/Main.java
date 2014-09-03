@@ -1,25 +1,21 @@
 package com.axy.WeakMyPC;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
 import com.axy.WeakMyPC.Database.DbConnection;
-import com.axy.WeakMyPC.Database.Entities.ComputerModel;
+import com.axy.WeakMyPC.Database.Models.ComputerModel;
 import com.axy.WeakMyPC.Framework.Events.GenericEventArg;
 import com.axy.WeakMyPC.Framework.Events.IGenericEventListener;
 import com.axy.WeakMyPC.Misc.ApplicationContext;
 import com.axy.WeakMyPC.ViewModels.ComputerListViewModel;
 import com.db4o.ObjectContainer;
-import com.db4o.ext.Db4oUUID;
 import org.robobinding.binder.Binders;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Activity {
@@ -46,7 +42,7 @@ public class Main extends Activity {
             @Override
             public void execute(GenericEventArg<ComputerModel> arg) {
                 Intent intent = new Intent(Main.this, AddEditPC.class);
-                intent.putExtra("ModelId", arg.output.getId());
+                intent.putExtra("ModelId", arg.getSource().getId());
                 startActivity(intent);
             }
         });

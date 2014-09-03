@@ -8,7 +8,5 @@ package com.axy.WeakMyPC.Framework.Events;
 public class EventArg
 {
     public static final EventArg EMPTY = new EventArg();
-
-    public Object output;
 }
 

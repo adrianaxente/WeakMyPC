@@ -1,17 +1,17 @@
-package com.axy.WeakMyPC.Database.Entities;
+package com.axy.WeakMyPC.Database.Models;
 
 import com.axy.WeakMyPC.Database.DbConnection;
+import com.axy.WeakMyPC.Framework.Events.GenericEvent;
+import com.axy.WeakMyPC.Framework.Events.PropertyChangedEvent;
 import com.db4o.config.EmbeddedConfiguration;
-import com.db4o.ext.Db4oUUID;
 import com.db4o.ext.ObjectInfo;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * Created by adrianaxente on 29.08.2014.
  */
-public class ComputerModel implements Serializable {
+public class ComputerModel extends AbstractModel<ComputerModel> implements Serializable {
 
     // <editor-fold desc="Static Fields">
 
@@ -45,16 +45,6 @@ public class ComputerModel implements Serializable {
 
     // </editor-fold>
 
-    // </editor-fold description="Getters & Setters">
-
-    public long getId()
-    {
-        ObjectInfo objectInfo = DbConnection.getObjectContainer().ext().getObjectInfo(this);
-        return objectInfo != null ? objectInfo.getInternalID() : null;
-    }
-
-    // </editor-fold>
-
     // <editor-fold desc="Static Methods">
 
     /**
@@ -67,6 +57,20 @@ public class ComputerModel implements Serializable {
         dbConfiguration.common().objectClass(ComputerModel.class).cascadeOnUpdate(true);
         dbConfiguration.common().objectClass(ComputerModel.class).cascadeOnActivate(true);
         dbConfiguration.common().objectClass(ComputerModel.class).generateUUIDs(true);
+    }
+
+    /**
+     * Copies the properties of teh source object into this object
+     * @param source
+     * @throws com.db4o.foundation.ArgumentNullException
+     */
+    @Override
+    public void copyFrom(ComputerModel source) {
+        super.copyFrom(source);
+        this.Name = source.Name;
+        this.IpAddress = source.IpAddress;
+        this.MacAddress = source.MacAddress;
+        this.Port = source.Port;
     }
 
     // </editor-fold>

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 /**
  * Created by adrianaxente on 01.09.2014.
  */
-public class GenericEventBase<TEventListener extends IGenericEventListenerBase<GenericEventArg<TOutputParam>, TOutputParam>, TOutputParam>
+public class GenericEventBase<TSource, TEventArg extends GenericEventArg<TSource>, TEventListener extends IGenericEventListenerBase<TSource, TEventArg>>
 {
     private LinkedList<TEventListener> _listeners;
 
@@ -44,7 +44,7 @@ public class GenericEventBase<TEventListener extends IGenericEventListenerBase<G
         }
     }
 
-    public void fire(GenericEventArg<TOutputParam> arg)
+    public void fire(TEventArg arg)
     {
         if (arg == null)
         {

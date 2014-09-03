@@ -7,11 +7,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import com.axy.WeakMyPC.Database.DbConnection;
-import com.axy.WeakMyPC.Database.Entities.ComputerModel;
+import com.axy.WeakMyPC.Database.Models.ComputerModel;
 import com.axy.WeakMyPC.Framework.Events.EventArg;
 import com.axy.WeakMyPC.Framework.Events.IEventListener;
 import com.axy.WeakMyPC.ViewModels.AddEditPCViewModel;
-import com.db4o.ext.ObjectInfo;
 import org.robobinding.binder.Binders;
 
 /**

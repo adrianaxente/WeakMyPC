@@ -1,6 +1,6 @@
 package com.axy.WeakMyPC.Framework.Events;
 
-public interface IGenericEventListener<TOutput> extends IGenericEventListenerBase<GenericEventArg<TOutput>, TOutput>
+public interface IGenericEventListener<TSource> extends IGenericEventListenerBase<TSource, GenericEventArg<TSource>>
 {
 
 }

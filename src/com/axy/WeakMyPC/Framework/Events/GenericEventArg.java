@@ -1,15 +1,17 @@
 package com.axy.WeakMyPC.Framework.Events;
 
-public class GenericEventArg<TOutput> extends EventArg
+public class GenericEventArg<TSource> extends EventArg
 {
-    public TOutput output;
+    public TSource _source;
 
     public GenericEventArg()
     {
     }
 
-    public GenericEventArg(TOutput output)
+    public GenericEventArg(TSource source)
     {
-        this.output = output;
+        this._source = source;
     }
+
+    public TSource getSource() {return  this._source; }
 }

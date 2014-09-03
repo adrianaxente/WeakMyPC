@@ -4,12 +4,11 @@ package com.axy.WeakMyPC.ViewModels;
 
 import android.view.MenuItem;
 import com.axy.WeakMyPC.Database.DbConnection;
-import com.axy.WeakMyPC.Database.Entities.ComputerModel;
+import com.axy.WeakMyPC.Database.Models.ComputerModel;
 import com.axy.WeakMyPC.Framework.Events.Event;
 import com.axy.WeakMyPC.Framework.Events.EventArg;
 import com.db4o.ObjectContainer;
 import org.robobinding.aspects.PresentationModel;
-import org.robobinding.presentationmodel.AbstractPresentationModel;
 
 /**
  * Created by adrianaxente on 30.08.2014.
@@ -19,11 +18,10 @@ public class AddEditPCViewModel
 {
     // <editor-fold description="Fields">
 
-    private ComputerModel _model;
-
     public final Event acceptEvent = new Event();
-
     public final Event cancelEvent = new Event();
+    private ComputerModel _sourceModel;
+    private ComputerModel _model;
 
 
     // </editor-fold>
@@ -39,7 +37,8 @@ public class AddEditPCViewModel
             throw new NullPointerException();
         }
 
-        this._model = model;
+        this._sourceModel = model;
+        this._model = model.createClone();
     }
 
     // </editor-fold>
@@ -61,6 +60,7 @@ public class AddEditPCViewModel
 
     public String getTitle()
     {
+        //todo: add localized string resource
         return this._model.getId() == 0
                     ? "Add Computer"
                     : "Edit Computer";
@@ -74,16 +74,19 @@ public class AddEditPCViewModel
     {
         //todo: Add the validation
 
-        ObjectContainer objContainer = DbConnection.getObjectContainer();
-        objContainer.store(this._model);
-        objContainer.commit();
+        this._sourceModel.copyFrom(this._model);
 
+        ObjectContainer objContainer = DbConnection.getObjectContainer();
+        objContainer.store(this._sourceModel);
+        objContainer.commit();
+        //this._sourceModel.changedEvent.fire(EventArg.EMPTY);
         this.acceptEvent.fire(EventArg.EMPTY); 
 
     }
 
     public void cancel(MenuItem menuItem)
     {
+
         this.cancelEvent.fire(EventArg.EMPTY);
     }
 
