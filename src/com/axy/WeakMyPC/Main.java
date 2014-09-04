@@ -40,7 +40,7 @@ public class Main extends Activity {
 
         viewModel.editEvent.addEventLister(new IGenericEventListener<ComputerModel>() {
             @Override
-            public void execute(GenericEventArg<ComputerModel> arg) {
+            public void execute(Object sender, GenericEventArg<ComputerModel> arg) {
                 Intent intent = new Intent(Main.this, AddEditPC.class);
                 intent.putExtra("ModelId", arg.getSource().getId());
                 startActivity(intent);

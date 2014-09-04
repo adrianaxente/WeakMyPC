@@ -5,6 +5,6 @@ package com.axy.WeakMyPC.Framework.Events;
  */
 public interface IGenericEventListenerBase<TSource, TEventArg extends GenericEventArg<TSource>>
 {
-    void execute(TEventArg arg);
+    void execute(Object sender, TEventArg arg);
 }
 

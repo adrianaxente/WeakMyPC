@@ -54,7 +54,7 @@ public class ComputerListViewModel
     public void editComputer(ItemClickEvent event) {
         ComputerModel computerModel =  this._model.get(event.getPosition());
         GenericEventArg<ComputerModel> args = new GenericEventArg<ComputerModel>(computerModel);
-        this.editEvent.fire(args);
+        this.editEvent.fire(this, args);
     }
 
     // </editor-fold>

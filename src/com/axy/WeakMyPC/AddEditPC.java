@@ -53,7 +53,7 @@ public class AddEditPC extends Activity
             new IEventListener()
             {
                 @Override
-                public void execute(EventArg arg)
+                public void execute(Object sender, EventArg arg)
                 {
                     AddEditPC.this.finish();
                 }

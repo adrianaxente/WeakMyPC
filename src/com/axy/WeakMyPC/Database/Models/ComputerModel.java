@@ -1,10 +1,7 @@
 package com.axy.WeakMyPC.Database.Models;
 
-import com.axy.WeakMyPC.Database.DbConnection;
-import com.axy.WeakMyPC.Framework.Events.GenericEvent;
-import com.axy.WeakMyPC.Framework.Events.PropertyChangedEvent;
+import com.axy.WeakMyPC.Framework.Model.AbstractModel;
 import com.db4o.config.EmbeddedConfiguration;
-import com.db4o.ext.ObjectInfo;
 
 import java.io.Serializable;
 
@@ -15,10 +12,10 @@ public class ComputerModel extends AbstractModel<ComputerModel> implements Seria
 
     // <editor-fold desc="Static Fields">
 
-    public String Name;
-    public String IpAddress;
-    public String MacAddress;
-    public int Port;
+    private String Name;
+    private String IpAddress;
+    private String MacAddress;
+    private int Port;
 
     // </editor-fold>
 
@@ -53,7 +50,7 @@ public class ComputerModel extends AbstractModel<ComputerModel> implements Seria
      */
     public static void DbConfigure(EmbeddedConfiguration dbConfiguration)
     {
-        dbConfiguration.common().objectClass(ComputerModel.class).objectField("Id").indexed(true);
+        //dbConfiguration.common().objectClass(ComputerModel.class).objectField("Id").indexed(true);
         dbConfiguration.common().objectClass(ComputerModel.class).cascadeOnUpdate(true);
         dbConfiguration.common().objectClass(ComputerModel.class).cascadeOnActivate(true);
         dbConfiguration.common().objectClass(ComputerModel.class).generateUUIDs(true);
@@ -71,6 +68,50 @@ public class ComputerModel extends AbstractModel<ComputerModel> implements Seria
         this.IpAddress = source.IpAddress;
         this.MacAddress = source.MacAddress;
         this.Port = source.Port;
+    }
+
+    // </editor-fold>
+
+    // <editor-fold desc="Getters & Setters">
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String newValue, Object sender) {
+        String oldValue = this.Name;
+        this.Name = newValue;
+        this.RaisePropertyChanged(sender, "name", newValue, oldValue);
+    }
+
+    public String getIpAddress() {
+        return IpAddress;
+    }
+
+    public void setIpAddress(String newValue, Object sender) {
+        String oldValue = this.IpAddress;
+        this.IpAddress = newValue;
+        this.RaisePropertyChanged(sender, "ipAddress", newValue, oldValue);
+    }
+
+    public String getMacAddress() {
+        return MacAddress;
+    }
+
+    public void setMacAddress(String newValue, Object sender) {
+        String oldValue = this.MacAddress;
+        this.MacAddress = newValue;
+        this.RaisePropertyChanged(sender, "macAddress", newValue, oldValue);
+    }
+
+    public int getPort() {
+        return Port;
+    }
+
+    public void setPort(int newValue, Object sender) {
+        int oldValue = this.Port;
+        this.Port = newValue;
+        this.RaisePropertyChanged(sender, "port", newValue, oldValue);
     }
 
     // </editor-fold>

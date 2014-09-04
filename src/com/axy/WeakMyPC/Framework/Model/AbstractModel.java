@@ -1,4 +1,4 @@
-package com.axy.WeakMyPC.Database.Models;
+package com.axy.WeakMyPC.Framework.Model;
 
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Framework.Events.PropertyChangedEvent;
@@ -12,7 +12,7 @@ import com.db4o.foundation.ArgumentNullException;
 public abstract class AbstractModel<TThis extends AbstractModel<TThis>> implements Cloneable
 {
 
-    public transient PropertyChangedEvent<TThis> propertyChangedEvent;
+    public transient PropertyChangedEvent<TThis> propertyChangedEvent = new PropertyChangedEvent<TThis>();
 
     public long getId()
     {
@@ -59,11 +59,15 @@ public abstract class AbstractModel<TThis extends AbstractModel<TThis>> implemen
     }
 
 
-    protected boolean RaisePropertyChanged(String propertyName, Object oldValue, Object newValue)
+    protected boolean RaisePropertyChanged(Object sender, String propertyName, Object oldValue, Object newValue)
     {
-        this.propertyChangedEvent.fire(
-                new PropertyChangedEventArg<TThis>((TThis)this, propertyName, oldValue, newValue));
+        if (oldValue != newValue) {
+            this.propertyChangedEvent.fire(
+                    sender,
+                    new PropertyChangedEventArg<TThis>((TThis) this, propertyName, oldValue, newValue));
+            return true;
+        }
 
-        return true;
+        return false;
     }
 }

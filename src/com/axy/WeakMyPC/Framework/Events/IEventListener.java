@@ -5,5 +5,5 @@ package com.axy.WeakMyPC.Framework.Events;
  */
 public interface IEventListener
 {
-    void execute(EventArg arg);
+    void execute(Object sender, EventArg arg);
 }

@@ -44,7 +44,7 @@ public class GenericEventBase<TSource, TEventArg extends GenericEventArg<TSource
         }
     }
 
-    public void fire(TEventArg arg)
+    public void fire(Object sender, TEventArg arg)
     {
         if (arg == null)
         {
@@ -53,7 +53,7 @@ public class GenericEventBase<TSource, TEventArg extends GenericEventArg<TSource
 
         for(TEventListener listener : this._listeners)
         {
-            listener.execute(arg);
+            listener.execute(sender, arg);
         }
     }
 }

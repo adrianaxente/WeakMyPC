@@ -44,7 +44,7 @@ public class Event
         }
     }
 
-    public void fire(EventArg arg)
+    public void fire(Object sender, EventArg arg)
     {
         if (arg == null)
         {
@@ -53,7 +53,7 @@ public class Event
 
         for(IEventListener listener : this._listeners)
         {
-            listener.execute(arg);
+            listener.execute(sender, arg);
         }
     }
 
