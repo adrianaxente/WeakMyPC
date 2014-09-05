@@ -5,12 +5,10 @@ package com.axy.WeakMyPC.ViewModels;
 import android.view.MenuItem;
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
-import com.axy.WeakMyPC.Framework.Events.Event;
-import com.axy.WeakMyPC.Framework.Events.EventArg;
-import com.axy.WeakMyPC.Framework.Presentation.AbstractViewModel;
+import com.axy.presentation.events.Event;
+import com.axy.presentation.events.EventArg;
+import com.axy.presentation.presentationModel.AbstractViewModel;
 import com.db4o.ObjectContainer;
-import org.robobinding.aspects.PresentationModel;
-import org.robobinding.presentationmodel.AbstractPresentationModel;
 
 /**
  * Created by adrianaxente on 30.08.2014.
@@ -30,6 +28,7 @@ public class AddEditPCViewModel extends AbstractViewModel<ComputerModel>
     public AddEditPCViewModel(ComputerModel model) throws NullPointerException
     {
         super(model);
+        this.beginEdit();
     }
 
     // </editor-fold>
@@ -63,6 +62,8 @@ public class AddEditPCViewModel extends AbstractViewModel<ComputerModel>
 
     public void accept(MenuItem menuItem)
     {
+        this.endEdit(true);
+        //todo: put this code to the base class
         this.getModel().propertyChangedEvent.removeEventListener(this);
         //todo: Add the validation
 
@@ -71,11 +72,13 @@ public class AddEditPCViewModel extends AbstractViewModel<ComputerModel>
         objContainer.commit();
         //this._sourceModel.changedEvent.fire(EventArg.EMPTY);
         this.acceptEvent.fire(this, EventArg.EMPTY);
-
     }
 
     public void cancel(MenuItem menuItem)
     {
+        this.endEdit(false);
+        //todo: put this code to the base class
+        this.getModel().propertyChangedEvent.removeEventListener(this);
         this.cancelEvent.fire(this, EventArg.EMPTY);
     }
 

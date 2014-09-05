@@ -1,6 +1,7 @@
 package com.axy.WeakMyPC.Database.Models;
 
-import com.axy.WeakMyPC.Framework.Model.AbstractModel;
+import com.axy.Base.BaseModel;
+import com.axy.presentation.model.AbstractModel;
 import com.db4o.config.EmbeddedConfiguration;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by adrianaxente on 29.08.2014.
  */
-public class ComputerModel extends AbstractModel<ComputerModel> implements Serializable {
+public class ComputerModel extends BaseModel<ComputerModel> implements Serializable {
 
     // <editor-fold desc="Static Fields">
 

@@ -1,7 +1,7 @@
 package com.axy.WeakMyPC.ViewModels;
 
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
-import com.axy.WeakMyPC.Framework.Events.*;
+import com.axy.presentation.events.*;
 import org.robobinding.annotation.ItemPresentationModel;
 import org.robobinding.aspects.PresentationModel;
 import org.robobinding.widget.adapterview.ItemClickEvent;

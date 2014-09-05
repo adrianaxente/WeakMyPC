@@ -8,8 +8,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
-import com.axy.WeakMyPC.Framework.Events.EventArg;
-import com.axy.WeakMyPC.Framework.Events.IEventListener;
+import com.axy.presentation.events.EventArg;
+import com.axy.presentation.events.IEventListener;
 import com.axy.WeakMyPC.ViewModels.AddEditPCViewModel;
 import org.robobinding.binder.Binders;
 
