@@ -1,8 +1,6 @@
 package com.axy.WeakMyPC.ViewModels;
 
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
-import com.axy.presentation.events.EventArg;
-import com.axy.presentation.events.IEventListener;
 import com.axy.presentation.presentationModel.AbstractItemViewModel;
 
 /**

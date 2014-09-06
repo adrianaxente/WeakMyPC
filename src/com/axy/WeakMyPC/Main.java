@@ -1,4 +1,4 @@
-package com.axy.presentation;
+package com.axy.WeakMyPC;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,10 +7,8 @@ import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.content.Intent;
 import android.view.View;
-import com.axy.WeakMyPC.AddEditPC;
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
-import com.axy.WeakMyPC.R;
 import com.axy.presentation.events.GenericEventArg;
 import com.axy.presentation.events.IGenericEventListener;
 import com.axy.WeakMyPC.Misc.ApplicationContext;

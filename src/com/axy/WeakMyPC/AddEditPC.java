@@ -55,6 +55,7 @@ public class AddEditPC extends Activity
                 @Override
                 public void execute(Object sender, EventArg arg)
                 {
+                    AddEditPC.this._viewModel.close();
                     AddEditPC.this.finish();
                 }
             };

@@ -63,8 +63,6 @@ public class AddEditPCViewModel extends AbstractViewModel<ComputerModel>
     public void accept(MenuItem menuItem)
     {
         this.endEdit(true);
-        //todo: put this code to the base class
-        this.getModel().propertyChangedEvent.removeEventListener(this);
         //todo: Add the validation
 
         ObjectContainer objContainer = DbConnection.getObjectContainer();
@@ -77,8 +75,6 @@ public class AddEditPCViewModel extends AbstractViewModel<ComputerModel>
     public void cancel(MenuItem menuItem)
     {
         this.endEdit(false);
-        //todo: put this code to the base class
-        this.getModel().propertyChangedEvent.removeEventListener(this);
         this.cancelEvent.fire(this, EventArg.EMPTY);
     }
 
