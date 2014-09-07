@@ -5,6 +5,7 @@ package com.axy.WeakMyPC.ViewModels;
 import android.view.MenuItem;
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
+import com.axy.events.ModelEventArgs;
 import com.axy.presentation.events.Event;
 import com.axy.presentation.events.EventArgs;
 import com.axy.presentation.presentationModel.AbstractViewModel;
@@ -17,8 +18,8 @@ public class AddEditPCViewModel extends AbstractViewModel<ComputerModel>
 {
     // <editor-fold description="Fields">
 
-    public final Event acceptEvent = new Event();
-    public final Event cancelEvent = new Event();
+    public final Event<ModelEventArgs> acceptEvent = new Event<ModelEventArgs>();
+    public final Event<ModelEventArgs> cancelEvent = new Event<ModelEventArgs>();
 
 
     // </editor-fold>
@@ -47,11 +48,13 @@ public class AddEditPCViewModel extends AbstractViewModel<ComputerModel>
     public String getPort() { return  String.valueOf(this.getModel().getPort()); }
     public void setPort(String port) { this.getModel().setPort(Integer.parseInt(port), this); }
 
+    public boolean getIsNew() { return  this.getModel().getId() == 0; }
+
 
     public String getTitle()
     {
         //todo: add localized string resource
-        return this.getModel().getId() == 0
+        return this.getIsNew()
                     ? "Add Computer"
                     : "Edit Computer";
     }
@@ -69,13 +72,13 @@ public class AddEditPCViewModel extends AbstractViewModel<ComputerModel>
         objContainer.store(this.getModel());
         objContainer.commit();
         //this._sourceModel.changedEvent.fire(EventArg.EMPTY);
-        this.acceptEvent.fire(EventArgs.EMPTY);
+        this.acceptEvent.fire(new ModelEventArgs(this.getModel()));
     }
 
     public void cancel(MenuItem menuItem)
     {
         this.endEdit(false);
-        this.cancelEvent.fire(EventArgs.EMPTY);
+        this.cancelEvent.fire(new ModelEventArgs(this.getModel()));
     }
 
     // </editor-fold>

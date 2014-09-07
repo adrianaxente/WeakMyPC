@@ -5,6 +5,7 @@ import com.axy.events.ModelEventArgs;
 import com.axy.presentation.events.*;
 import org.robobinding.annotation.ItemPresentationModel;
 import org.robobinding.aspects.PresentationModel;
+import org.robobinding.presentationmodel.AbstractPresentationModel;
 import org.robobinding.widget.adapterview.ItemClickEvent;
 
 import java.util.List;
@@ -12,8 +13,8 @@ import java.util.List;
 /**
  * Created by adrianaxente on 30.08.2014.
  */
-@PresentationModel
-public class ComputerListViewModel
+
+public class ComputerListViewModel extends AbstractPresentationModel
 {
 
     // <editor-fold description="Fields">

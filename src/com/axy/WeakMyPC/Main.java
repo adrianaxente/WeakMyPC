@@ -14,6 +14,9 @@ import com.axy.events.ModelEventListener;
 import com.axy.presentation.events.IEventListener;
 import com.axy.WeakMyPC.Misc.ApplicationContext;
 import com.axy.WeakMyPC.ViewModels.ComputerListViewModel;
+import com.axy.presentation.observable.colections.CollectionChangedEventArgs;
+import com.axy.presentation.observable.colections.ICollectionChangedEventListener;
+import com.axy.presentation.observable.colections.ListObservableWrapper;
 import com.db4o.ObjectContainer;
 import org.robobinding.binder.Binders;
 
@@ -32,9 +35,12 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
 
         ObjectContainer objectContainer = DbConnection.getObjectContainer();
-        List<ComputerModel> model = objectContainer.query(ComputerModel.class);
 
-        ComputerListViewModel viewModel = new ComputerListViewModel(model);
+        ListObservableWrapper<ComputerModel> model =
+                new ListObservableWrapper<ComputerModel>(
+                    objectContainer.query(ComputerModel.class));
+
+        final ComputerListViewModel viewModel = new ComputerListViewModel(model);
 
         View rootView = Binders.inflateAndBind(this, R.layout.computers, viewModel);
         setContentView(rootView);
@@ -45,6 +51,13 @@ public class Main extends Activity {
                 Intent intent = new Intent(Main.this, AddEditPC.class);
                 intent.putExtra("ModelId", args.getModel().getId());
                 startActivity(intent);
+            }
+        });
+
+        model.getCollectionChangedEvent().addEventLister(new ICollectionChangedEventListener() {
+            @Override
+            public void onExecute(CollectionChangedEventArgs args) {
+                viewModel.refreshPresentationModel();
             }
         });
     }
