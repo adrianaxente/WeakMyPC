@@ -20,8 +20,8 @@ public class ComputerListViewModel
 
     private List<ComputerModel> _model;
 
-    public final Event<ModelEventArgs<ComputerModel>, IEventListener<ModelEventArgs<ComputerModel>>> editEvent =
-        new Event<ModelEventArgs<ComputerModel>, IEventListener<ModelEventArgs<ComputerModel>>>();
+    public final Event<ModelEventArgs<ComputerModel>> editEvent =
+        new Event<ModelEventArgs<ComputerModel>>();
 
     // </editor-fold>
 

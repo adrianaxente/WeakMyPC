@@ -10,6 +10,7 @@ import android.view.View;
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
 import com.axy.events.ModelEventArgs;
+import com.axy.events.ModelEventListener;
 import com.axy.presentation.events.IEventListener;
 import com.axy.WeakMyPC.Misc.ApplicationContext;
 import com.axy.WeakMyPC.ViewModels.ComputerListViewModel;
@@ -38,7 +39,7 @@ public class Main extends Activity {
         View rootView = Binders.inflateAndBind(this, R.layout.computers, viewModel);
         setContentView(rootView);
 
-        viewModel.editEvent.addEventLister(new IEventListener<ModelEventArgs<ComputerModel>>() {
+        viewModel.editEvent.addEventLister(new ModelEventListener<ComputerModel>() {
             @Override
             public void onExecute(ModelEventArgs<ComputerModel> args) {
                 Intent intent = new Intent(Main.this, AddEditPC.class);

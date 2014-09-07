@@ -1,7 +1,6 @@
-package com.axy.Base;
+package com.axy.base;
 
 import com.axy.WeakMyPC.Database.DbConnection;
-import com.axy.presentation.model.AbstractModel;
 import com.axy.presentation.model.observable.ObservableModel;
 import com.db4o.ext.ObjectInfo;
 
