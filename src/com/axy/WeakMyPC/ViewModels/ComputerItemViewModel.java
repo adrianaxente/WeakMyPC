@@ -1,6 +1,6 @@
 package com.axy.WeakMyPC.ViewModels;
 
-import com.axy.WeakMyPC.Database.Models.ComputerModel;
+import com.axy.WeakMyPC.Models.ComputerModel;
 import com.axy.presentation.presentationModel.AbstractItemViewModel;
 
 /**

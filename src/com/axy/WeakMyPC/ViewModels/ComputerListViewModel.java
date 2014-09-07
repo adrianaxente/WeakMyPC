@@ -1,10 +1,9 @@
 package com.axy.WeakMyPC.ViewModels;
 
-import com.axy.WeakMyPC.Database.Models.ComputerModel;
+import com.axy.WeakMyPC.Models.ComputerModel;
 import com.axy.events.ModelEventArgs;
 import com.axy.presentation.events.*;
 import org.robobinding.annotation.ItemPresentationModel;
-import org.robobinding.aspects.PresentationModel;
 import org.robobinding.presentationmodel.AbstractPresentationModel;
 import org.robobinding.widget.adapterview.ItemClickEvent;
 

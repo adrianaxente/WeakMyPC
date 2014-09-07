@@ -7,20 +7,16 @@ import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.content.Intent;
 import android.view.View;
-import com.axy.WeakMyPC.Database.DbConnection;
-import com.axy.WeakMyPC.Database.Models.ComputerModel;
+import com.axy.WeakMyPC.Models.ComputerModel;
+import com.axy.datastore.DB4ODataStore;
+import com.axy.environment.ApplicationEnvironment;
 import com.axy.events.ModelEventArgs;
 import com.axy.events.ModelEventListener;
-import com.axy.presentation.events.IEventListener;
-import com.axy.WeakMyPC.Misc.ApplicationContext;
 import com.axy.WeakMyPC.ViewModels.ComputerListViewModel;
 import com.axy.presentation.observable.colections.CollectionChangedEventArgs;
 import com.axy.presentation.observable.colections.ICollectionChangedEventListener;
 import com.axy.presentation.observable.colections.ListObservableWrapper;
-import com.db4o.ObjectContainer;
 import org.robobinding.binder.Binders;
-
-import java.util.List;
 
 public class Main extends Activity {
 
@@ -30,15 +26,15 @@ public class Main extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        ApplicationContext.getInstance().init(getApplicationContext());
+        ApplicationEnvironment.getInstance().init(getApplicationContext());
 
         super.onCreate(savedInstanceState);
 
-        ObjectContainer objectContainer = DbConnection.getObjectContainer();
+        DB4ODataStore dataStore = ApplicationEnvironment.getInstance().getDataStore();
 
         ListObservableWrapper<ComputerModel> model =
                 new ListObservableWrapper<ComputerModel>(
-                    objectContainer.query(ComputerModel.class));
+                    dataStore.<ComputerModel>getAll());
 
         final ComputerListViewModel viewModel = new ComputerListViewModel(model);
 
@@ -49,7 +45,7 @@ public class Main extends Activity {
             @Override
             public void onExecute(ModelEventArgs<ComputerModel> args) {
                 Intent intent = new Intent(Main.this, AddEditPC.class);
-                intent.putExtra("ModelId", args.getModel().getId());
+                intent.putExtra("ModelId", ApplicationEnvironment.getInstance().getDataStore().getId(args.getModel()).longValue());
                 startActivity(intent);
             }
         });

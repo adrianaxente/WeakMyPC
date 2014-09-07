@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Weak my pC</string>
-    <string name="action_add_new">Add new PC</string>
+    <string name="app_name">Weak my Computer</string>
+    <string name="action_add_new">Add new Computer</string>
     <string name="action_remove">Remove</string>
     <string name="action_accept">Accept</string>
 </resources>

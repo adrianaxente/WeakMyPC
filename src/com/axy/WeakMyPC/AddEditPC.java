@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import com.axy.WeakMyPC.Database.DbConnection;
-import com.axy.WeakMyPC.Database.Models.ComputerModel;
+import com.axy.WeakMyPC.Models.ComputerModel;
+import com.axy.environment.ApplicationEnvironment;
 import com.axy.presentation.events.EventArgs;
 import com.axy.presentation.events.IEventListener;
 import com.axy.WeakMyPC.ViewModels.AddEditPCViewModel;
@@ -32,13 +32,9 @@ public class AddEditPC extends Activity
         super.onCreate(savedInstanceState);
 
         Intent intent = this.getIntent();
-        long modelId = intent.getLongExtra("ModelId", 0);
+        Long modelId = new Long(intent.getLongExtra("ModelId", 0));
 
-        if (modelId != 0)
-        {
-            this._model = DbConnection.getObjectContainer().ext().getByID(modelId);
-            DbConnection.getObjectContainer().ext().activate(this._model);
-        }
+        this._model = ApplicationEnvironment.getInstance().getDataStore().getById(modelId);
 
         if (this._model == null)
         {

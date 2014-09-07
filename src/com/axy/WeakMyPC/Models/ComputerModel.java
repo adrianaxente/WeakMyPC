@@ -1,6 +1,5 @@
-package com.axy.WeakMyPC.Database.Models;
+package com.axy.WeakMyPC.Models;
 
-import com.axy.base.BaseModel;
 import com.db4o.config.EmbeddedConfiguration;
 
 import java.io.Serializable;
