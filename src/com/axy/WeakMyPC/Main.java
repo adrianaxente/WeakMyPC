@@ -9,8 +9,8 @@ import android.content.Intent;
 import android.view.View;
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
-import com.axy.presentation.events.GenericEventArg;
-import com.axy.presentation.events.IGenericEventListener;
+import com.axy.events.ModelEventArgs;
+import com.axy.presentation.events.IEventListener;
 import com.axy.WeakMyPC.Misc.ApplicationContext;
 import com.axy.WeakMyPC.ViewModels.ComputerListViewModel;
 import com.db4o.ObjectContainer;
@@ -38,11 +38,11 @@ public class Main extends Activity {
         View rootView = Binders.inflateAndBind(this, R.layout.computers, viewModel);
         setContentView(rootView);
 
-        viewModel.editEvent.addEventLister(new IGenericEventListener<ComputerModel>() {
+        viewModel.editEvent.addEventLister(new IEventListener<ModelEventArgs<ComputerModel>>() {
             @Override
-            public void execute(Object sender, GenericEventArg<ComputerModel> arg) {
+            public void onExecute(ModelEventArgs<ComputerModel> args) {
                 Intent intent = new Intent(Main.this, AddEditPC.class);
-                intent.putExtra("ModelId", arg.getSource().getId());
+                intent.putExtra("ModelId", args.getModel().getId());
                 startActivity(intent);
             }
         });

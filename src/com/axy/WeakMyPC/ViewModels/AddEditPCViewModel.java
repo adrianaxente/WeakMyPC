@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
 import com.axy.presentation.events.Event;
-import com.axy.presentation.events.EventArg;
+import com.axy.presentation.events.EventArgs;
 import com.axy.presentation.presentationModel.AbstractViewModel;
 import com.db4o.ObjectContainer;
 
@@ -69,13 +69,13 @@ public class AddEditPCViewModel extends AbstractViewModel<ComputerModel>
         objContainer.store(this.getModel());
         objContainer.commit();
         //this._sourceModel.changedEvent.fire(EventArg.EMPTY);
-        this.acceptEvent.fire(this, EventArg.EMPTY);
+        this.acceptEvent.fire(EventArgs.EMPTY);
     }
 
     public void cancel(MenuItem menuItem)
     {
         this.endEdit(false);
-        this.cancelEvent.fire(this, EventArg.EMPTY);
+        this.cancelEvent.fire(EventArgs.EMPTY);
     }
 
     // </editor-fold>

@@ -8,7 +8,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import com.axy.WeakMyPC.Database.DbConnection;
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
-import com.axy.presentation.events.EventArg;
+import com.axy.presentation.events.EventArgs;
 import com.axy.presentation.events.IEventListener;
 import com.axy.WeakMyPC.ViewModels.AddEditPCViewModel;
 import org.robobinding.binder.Binders;
@@ -53,7 +53,7 @@ public class AddEditPC extends Activity
             new IEventListener()
             {
                 @Override
-                public void execute(Object sender, EventArg arg)
+                public void onExecute(EventArgs arg)
                 {
                     AddEditPC.this._viewModel.close();
                     AddEditPC.this.finish();

@@ -1,6 +1,7 @@
 package com.axy.WeakMyPC.ViewModels;
 
 import com.axy.WeakMyPC.Database.Models.ComputerModel;
+import com.axy.events.ModelEventArgs;
 import com.axy.presentation.events.*;
 import org.robobinding.annotation.ItemPresentationModel;
 import org.robobinding.aspects.PresentationModel;
@@ -19,7 +20,8 @@ public class ComputerListViewModel
 
     private List<ComputerModel> _model;
 
-    public final GenericEvent<ComputerModel> editEvent = new GenericEvent<ComputerModel>();
+    public final Event<ModelEventArgs<ComputerModel>, IEventListener<ModelEventArgs<ComputerModel>>> editEvent =
+        new Event<ModelEventArgs<ComputerModel>, IEventListener<ModelEventArgs<ComputerModel>>>();
 
     // </editor-fold>
 
@@ -53,8 +55,8 @@ public class ComputerListViewModel
 
     public void editComputer(ItemClickEvent event) {
         ComputerModel computerModel =  this._model.get(event.getPosition());
-        GenericEventArg<ComputerModel> args = new GenericEventArg<ComputerModel>(computerModel);
-        this.editEvent.fire(this, args);
+        ModelEventArgs<ComputerModel> args = new ModelEventArgs<ComputerModel>(this, computerModel);
+        this.editEvent.fire(args);
     }
 
     // </editor-fold>
