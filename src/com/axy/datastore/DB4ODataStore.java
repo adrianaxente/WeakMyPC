@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class DB4ODataStore implements IDataStore<Long>, ICloseable
 {
-    private final DB4OConfiguration _configuration;
+    protected final DB4OConfiguration _configuration;
 
     private ObjectContainer _objectContainer = null;
 
@@ -95,7 +95,7 @@ public class DB4ODataStore implements IDataStore<Long>, ICloseable
         this._objectContainer = null;
     }
 
-    private ObjectContainer getObjectContainer()
+    protected ObjectContainer getObjectContainer()
     {
         try
         {

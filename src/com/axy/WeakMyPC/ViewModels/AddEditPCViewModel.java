@@ -4,6 +4,8 @@ package com.axy.WeakMyPC.ViewModels;
 
 import android.view.MenuItem;
 import com.axy.WeakMyPC.Models.ComputerModel;
+import com.axy.WeakMyPC.Models.RootModel;
+import com.axy.datastore.WakeMyPcDataStore;
 import com.axy.environment.ApplicationEnvironment;
 import com.axy.events.ModelEventArgs;
 import com.axy.presentation.events.Event;
@@ -67,7 +69,19 @@ public class AddEditPCViewModel extends AbstractViewModel<ComputerModel>
         this.endEdit(true);
         //todo: Add the validation
 
-        ApplicationEnvironment.getInstance().getDataStore().store(this.getModel());
+        ComputerModel model = this.getModel();
+        WakeMyPcDataStore dataStore = ApplicationEnvironment.getInstance().getDataStore();
+
+        RootModel rootModel = dataStore.getRoot();
+
+        if (this.getIsNew())
+        {
+            rootModel.getComputers().add(model);
+        }
+
+        dataStore.store(rootModel);
+        dataStore.store(model);
+
         //this._sourceModel.changedEvent.fire(EventArg.EMPTY);
         this.acceptEvent.fire(new ModelEventArgs(this.getModel()));
     }

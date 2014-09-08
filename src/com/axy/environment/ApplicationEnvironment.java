@@ -3,6 +3,7 @@ package com.axy.environment;
 import android.content.Context;
 import com.axy.datastore.DB4OConfiguration;
 import com.axy.datastore.DB4ODataStore;
+import com.axy.datastore.WakeMyPcDataStore;
 
 /**
  * Created by adrianaxente on 08.09.2014.
@@ -13,7 +14,7 @@ public class ApplicationEnvironment
 
     private final String DATABASE_FILE_NAME = "WakeMyPc.db4o";
 
-    private DB4ODataStore _dataStore = null;
+    private WakeMyPcDataStore _dataStore = null;
 
     private Context _applicationContext = null;
 
@@ -27,13 +28,13 @@ public class ApplicationEnvironment
         }
     }
 
-    public DB4ODataStore getDataStore()
+    public WakeMyPcDataStore getDataStore()
     {
         if (_dataStore == null)
         {
             String dataBasePath = _applicationContext.getDir("data", 0) + "/" + DATABASE_FILE_NAME;
             DB4OConfiguration db4OConfiguration = new DB4OConfiguration(dataBasePath);
-            this._dataStore = new DB4ODataStore(db4OConfiguration);
+            this._dataStore = new WakeMyPcDataStore(db4OConfiguration);
         }
 
         return  this._dataStore;

@@ -8,7 +8,9 @@ import android.view.MenuInflater;
 import android.content.Intent;
 import android.view.View;
 import com.axy.WeakMyPC.Models.ComputerModel;
+import com.axy.WeakMyPC.Models.RootModel;
 import com.axy.datastore.DB4ODataStore;
+import com.axy.datastore.WakeMyPcDataStore;
 import com.axy.environment.ApplicationEnvironment;
 import com.axy.events.ModelEventArgs;
 import com.axy.events.ModelEventListener;
@@ -30,13 +32,13 @@ public class Main extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        DB4ODataStore dataStore = ApplicationEnvironment.getInstance().getDataStore();
+        WakeMyPcDataStore dataStore = ApplicationEnvironment.getInstance().getDataStore();
 
-        ListObservableWrapper<ComputerModel> model =
-                new ListObservableWrapper<ComputerModel>(
-                    dataStore.<ComputerModel>getAll());
+        RootModel root = dataStore.getRoot();
+        ListObservableWrapper<ComputerModel> allComputers = root.getComputers();
 
-        final ComputerListViewModel viewModel = new ComputerListViewModel(model);
+
+        final ComputerListViewModel viewModel = new ComputerListViewModel(allComputers);
 
         View rootView = Binders.inflateAndBind(this, R.layout.computers, viewModel);
         setContentView(rootView);
@@ -50,7 +52,7 @@ public class Main extends Activity {
             }
         });
 
-        model.getCollectionChangedEvent().addEventLister(new ICollectionChangedEventListener() {
+        allComputers.getCollectionChangedEvent().addEventLister(new ICollectionChangedEventListener() {
             @Override
             public void onExecute(CollectionChangedEventArgs args) {
                 viewModel.refreshPresentationModel();

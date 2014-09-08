@@ -22,8 +22,6 @@ public class DB4OConfiguration implements IDataStoreConfiguration
         this._databasePath = _databasePath;
 
         this._db4oConfiguration = Db4oEmbedded.newConfiguration();
-        //todo: move this to an external class
-        ComputerModel.DbConfigure(this._db4oConfiguration);
     }
 
     @Override
